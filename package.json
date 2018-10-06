@@ -1,0 +1,41 @@
+{
+  "name": "ez-ssh",
+  "version": "1.0.0",
+  "description": "Super simple command line interface for handling ssh into a remote machine.",
+  "main": "./index.js",
+  "preferGlobal": true,
+  "bin": {
+    "ez-ssh": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobertMcReed/easy2.git"
+  },
+  "keywords": [
+    "ssh",
+    "ec2",
+    "aws",
+    "digital ocean",
+    "rmate",
+    "cli"
+  ],
+  "author": "Robert Reed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RobertMcReed/ez-ssh/issues"
+  },
+  "homepage": "https://github.com/RobertMcReed/ez-ssh#readme",
+  "dependencies": {
+    "command-line-args": "^5.0.2",
+    "command-line-usage": "^5.0.5",
+    "fs-extra": "^7.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
