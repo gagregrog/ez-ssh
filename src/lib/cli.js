@@ -80,6 +80,18 @@ const optionList = [
     description: 'Delete a stored key.',
   },
   {
+    name: 'list',
+    alias: 'l',
+    type: Boolean,
+    description: 'List the saved keys. Also aliased as "ez-ssh ls".',
+  },
+  {
+    name: 'verbose',
+    alias: 'v',
+    type: Boolean,
+    description: 'When listing keys, use the verbose flag to show the command each key maps to.',
+  },
+  {
     name: 'help',
     alias: 'h',
     type: Boolean,
