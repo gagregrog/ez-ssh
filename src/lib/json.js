@@ -13,9 +13,9 @@ json.read = async () => {
     const fileExists = await fs.exists(file);
 
     if (fileExists) {
-      const arr = await fs.readJson(file);
+      const keys = await fs.readJson(file, { throws: false });
 
-      return arr;
+      return keys || {};
     } 
     
     return {};
