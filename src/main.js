@@ -14,8 +14,10 @@ const main = async (options) => {
   const numKeys = keyNames.length;
   const isCalling = util.isCalling(options);
   const command = keys[options.key];
+  const list = (['ls', 'lsv'].includes(options.key) || options.list);
 
-  if (isCalling && command) shell.exec(command); // command exists, execute it
+  if (list) util.handleList(options, keys, keyNames);
+  else if (isCalling && command) shell.exec(command); // command exists, execute it
   else if (isCalling && numKeys) { // command doesn't exists, but commands do
     util.err('Command not found:', options.key);
     util.info(`Saved keys: ${keyNames.join(', ')}`); 
