@@ -13,9 +13,9 @@ json.read = async () => {
     const fileExists = await fs.exists(file);
 
     if (fileExists) {
-      const keys = await fs.readJson(file, { throws: false });
+      const commands = await fs.readJson(file, { throws: false });
 
-      return keys || {};
+      return commands || {};
     } 
     
     return {};
@@ -26,9 +26,9 @@ json.read = async () => {
   }
 };
 
-json.write = async (keys) => {
+json.write = async (commands) => {
   try {
-    await fs.writeJson(fileName, keys);
+    await fs.writeJson(fileName, commands);
 
     return true;
   } catch (e) {
@@ -38,10 +38,10 @@ json.write = async (keys) => {
   }
 };
 
-json.deleteCommand = async (keys, key) => {
-  delete keys[key];
-  const success = await json.write(keys);
+json.deleteCommand = async (command, commands) => {
+  delete commands[command];
+  const success = await json.write(commands);
   
-  if (success) log(`Key "${key}" deleted successfully.`);
-  else err(`Could not delete key ${key}. Please try again.`);
+  if (success) log(`Command "${command}" deleted successfully.`);
+  else err(`Could not delete command ${command}. Please try again.`);
 };
