@@ -46,7 +46,7 @@ const addCommand = async (options, commands) => {
 
   if (complete || address) {
     log('Would you like to store this shortcut?\n');
-    console.log('\nname:', name);
+    console.log('\n\tname:', name);
     console.log('\n\tcommand:', command, '\n');
     const { confirm } = await prompt({
       type: 'text',
@@ -61,7 +61,7 @@ const addCommand = async (options, commands) => {
 
       if (success) log(`Success! Use your new command by typing "ez-ssh ${command}"`);
       else err('Something went wrong, please try again.');
-    } else log('Command canceled.');
+    } else log('Command not stored.');
   }
 };
 
