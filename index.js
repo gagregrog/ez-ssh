@@ -8,5 +8,5 @@ const { err, hasArgs, handleError } = require('./src/lib/util');
 
 if (error) err(error);
 else if (options.help || !hasArgs(options)) console.log(usage);
-else if (!options.key) handleError('You must provide a keyword when adding or running a command.');
+else if (!(options.key || options.list)) handleError('You must provide a keyword when adding or running a command.');
 else main(options);
