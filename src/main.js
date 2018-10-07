@@ -1,35 +1,35 @@
 'use strict';
 
 const shell = require('shelljs');
+const ssh = require('./lib/ssh');
 const json = require('./lib/json');
 const util = require('./lib/util');
-const handleSSH = require('./lib/ssh');
 
 const main = async (options) => {
-  const keys = await json.read();
+  const commands = await json.read();
 
-  if (!keys) return;
+  if (!commands) return;
 
-  const keyNames = Object.keys(keys);
-  const numKeys = keyNames.length;
+  const commandNames = Object.keys(commands);
+  const numCommands = commandNames.length;
   const isCalling = util.isCalling(options);
-  const command = keys[options.key];
-  const list = (['ls', 'lsv'].includes(options.key) || options.list);
+  const command = commands[options.name];
+  const list = (['ls', 'lsv'].includes(options.name) || options.list);
 
-  if (list) util.handleList(options, keys, keyNames);
+  if (list) util.handleList(options, commands, commandNames);
   else if (isCalling && command) shell.exec(command); // command exists, execute it
-  else if (isCalling && numKeys) { // command doesn't exists, but commands do
-    util.err('Command not found:', options.key);
-    util.info(`Saved keys: ${keyNames.join(', ')}`); 
-  } else if (isCalling) util.handleError('You do not have any saved keys.'); // no commands
+  else if (isCalling && numCommands) { // command doesn't exists, but commands do
+    util.err(`Command not found: "${options.name}"`);
+    util.logHelp(`Saved commands: ${commandNames.join(', ')}\n`); 
+  } else if (isCalling) util.handleError('You do not have any saved commands.'); // no commands
   else if (command && !options.delete) { // command exists but they aren't calling or deleting
     util.handleError(
-      `The key "${options.key}" already exists.`, 
-      `Either run the command again with a different keyword, or delete the existing command with "ez-ssh ${options.key} -d"`
+      `The command "${options.name}" already exists.`, 
+      `Either execute your call again with a different name, or delete the existing command with "ez-ssh ${options.name} -d"`
     );
-  } else if (command) json.deleteCommand(keys, options.key); // deleting a command
-  else if (options.delete) util.handleError(`The key "${options.key}" does not exist, and therefore cannot be deleted.`);
-  else handleSSH(options, keys);
+  } else if (command) ssh.deleteCommand(options.name, commands); // deleting a command
+  else if (options.delete) util.handleError(`The command "${options.name}" does not exist, and therefore cannot be deleted.`);
+  else ssh.addCommand(options, commands);
 };
 
 module.exports = main;
