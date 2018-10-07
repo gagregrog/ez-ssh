@@ -1,5 +1,7 @@
 'use strict';
 
+const { help } = require('./constants');
+
 const util = module.exports = {};
 
 util.log = (...args) => console.log('\n[INFO]', ...args);
@@ -10,13 +12,13 @@ util.handleError = (...messages) => {
   messages.forEach((message) => {
     util.err(message);
   });
-  console.log('\n\tType "ez-ssh -h" for help getting started.');
+  console.log(help);
 };
 
 util.hasArgs = (options) => {
   let hasArgs = false;
-  Object.keys(options).some((key) => {
-    if (options[key]) {
+  Object.keys(options).some((command) => {
+    if (options[command]) {
       hasArgs = true;
     }
 
@@ -26,18 +28,37 @@ util.hasArgs = (options) => {
   return hasArgs;
 };
 
-util.isCalling = (options) => (Object.keys(options).length === 1 && !!options.key);
+util.isCalling = (options) => (Object.keys(options).length === 1 && !!options.name);
 
-util.handleList = (options, keys, keyNames) => {
-  if (!keyNames.length) util.log('You have no saved keys.', '\n\tType "ez-ssh -h" for help getting started.');
+util.logHelp = (...args) => util.log(...args, help);
+
+util.handleList = (options, commands, commandNames) => {
+  if (!commandNames.length) util.logHelp('You have no saved commands.\n');
   else {
-    util.log('Your saved keys are as follows:\n');
+    util.log('Your saved commands are as follows:\n');
 
-    if (options.verbose || options.key === 'lsv') {
-      const max = keyNames.reduce((a, c) => (a > c.length ? a : c.length));
-      keyNames.forEach((key) => {
-        console.log(`\t${key.padEnd(max)}: ${keys[key]}`);
+    if (options.verbose || options.name === 'lsv') {
+      const max = commandNames.reduce((a, c) => (a > c.length ? a : c.length));
+      commandNames.forEach((command) => {
+        console.log(`\t${command.padEnd(max)}: ${commands[command]}`);
       });
-    } else console.log(`\t${keyNames.join(', ')}`);
+    } else console.log(`\t${commandNames.join(', ')}`);
   }
+};
+
+util.validatePrompt = (val) => {
+  let confirm = true;
+  val = val.toLowerCase();
+
+  (['n', 'no', 'nope', 'nah', 'cancel', 'abort', 'q', 'quit', 'exit']).some((word) => {
+    if (val.includes(word)) {
+      confirm = false;
+
+      return true;
+    }
+
+    return false;
+  });
+
+  return confirm;
 };
