@@ -33,7 +33,7 @@ util.handleList = (options, keys, keyNames) => {
   else {
     util.log('Your saved keys are as follows:\n');
 
-    if (options.verbose) {
+    if (options.verbose || options.key === 'lsv') {
       const max = keyNames.reduce((a, c) => (a > c.length ? a : c.length));
       keyNames.forEach((key) => {
         console.log(`\t${key.padEnd(max)}: ${keys[key]}`);
