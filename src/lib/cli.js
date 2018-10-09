@@ -29,11 +29,17 @@ const cli = module.exports = {
 
 const optionList = [
   {
+    name: 'wizard',
+    alias: 'w',
+    type: Boolean,
+    description: 'Use the interactive wizard to create your shortcut.',
+  },
+  {
     name: 'name',
     alias: 'n',
     type: String,
     defaultOption: true,
-    description: '{rgb(255, 0, 0) Required} The name used to identify the command.',
+    description: 'The name used to identify the alias. This is the default entry, no flag is required.',
   },
   {
     name: 'address',
@@ -77,19 +83,19 @@ const optionList = [
     name: 'delete',
     alias: 'd',
     type: Boolean,
-    description: 'Delete a stored command.',
+    description: 'Delete a stored alias.',
   },
   {
     name: 'list',
     alias: 'l',
     type: Boolean,
-    description: 'List the saved commands. Also aliased as "ez-ssh ls".',
+    description: 'List the saved aliases. Also accessible by "ez-ssh ls".',
   },
   {
     name: 'verbose',
     alias: 'v',
     type: Boolean,
-    description: 'When listing commands, use the verbose flag to show the value each command maps to.',
+    description: 'When listing aliases, use the verbose flag to show the value each alias maps to.',
   },
   {
     name: 'help',
@@ -120,7 +126,7 @@ const examples = makeTable([
   ],
   [
     'Custom',
-    'list -c "penguin.example.net ls /usr/share/doc"',
+    'lister -c "penguin.example.net ls /usr/share/doc"',
     'penguin.example.net ls /usr/share/doc',
     'list',
   ],
@@ -139,8 +145,8 @@ const sections = [
     header: 'Examples',
     content: examples.concat([
       { a: `${examples.length / 4 + 1}. Delete` },
-      { b: 'Input:  $ ez-ssh list -d' },
-      { b: 'Result: The "list" command has been deleted.' },
+      { b: 'Input:  $ ez-ssh lister -d' },
+      { b: 'Result: The "lister" alias has been deleted.' },
     ]),
   },
   {
