@@ -33,9 +33,9 @@ util.isCalling = (options) => (Object.keys(options).length === 1 && !!options.na
 util.logHelp = (...args) => util.log(...args, help);
 
 util.handleList = (options, commands, commandNames) => {
-  if (!commandNames.length) util.logHelp('You have no saved commands.\n');
+  if (!commandNames.length) util.logHelp('You have no saved aliases.\n');
   else {
-    util.log('Your saved commands are as follows:\n');
+    util.log('Your saved aliases are as follows:\n');
 
     if (options.verbose || options.name === 'lsv') {
       const max = commandNames.reduce((a, c) => (a > c.length ? a : c.length));
@@ -46,9 +46,11 @@ util.handleList = (options, commands, commandNames) => {
   }
 };
 
-util.validatePrompt = (val) => {
+util.validatePrompt = (confirmOnEnter) => (val) => {
   let confirm = true;
   val = val.toLowerCase();
+
+  if (val === '' && !confirmOnEnter) return false;
 
   (['n', 'no', 'nope', 'nah', 'cancel', 'abort', 'q', 'quit', 'exit']).some((word) => {
     if (val.includes(word)) {
