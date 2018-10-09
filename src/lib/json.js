@@ -42,6 +42,6 @@ json.deleteCommand = async (command, commands) => {
   delete commands[command];
   const success = await json.write(commands);
   
-  if (success) log(`Command "${command}" deleted successfully.`);
-  else err(`Could not delete command ${command}. Please try again.`);
+  if (success) log(`Alias "${command}" deleted successfully.`);
+  else err(`Could not delete alias ${command}. Please try again.`);
 };
