@@ -157,4 +157,4 @@ db
 .vscode/launch.json
 temp
 sandbox.js
-commands.json
+alias.json

@@ -27,7 +27,8 @@
     "no-underscore-dangle": [0],
     "no-plusplus": [0],
     "curly": [0],
-    "no-nested-ternary": [0]
+    "no-nested-ternary": [0],
+    "no-restricted-globals": [0]
   },
   "globals": {
     "API_URL": false,
