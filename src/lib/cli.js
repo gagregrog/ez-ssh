@@ -32,7 +32,7 @@ const optionList = [
     name: 'wizard',
     alias: 'w',
     type: Boolean,
-    description: 'Use the interactive wizard to create your shortcut.',
+    description: 'Use the interactive wizard to create your alias.',
   },
   {
     name: 'name',
@@ -51,7 +51,7 @@ const optionList = [
     name: 'identity',
     alias: 'i',
     type: String,
-    description: 'The name of a PEM file stored in ~/.ssh, or an absolute path to the file.',
+    description: 'The name of an identity file stored in ~/.ssh, or an absolute path to the file.',
   },
   {
     name: 'user',
@@ -128,7 +128,7 @@ const examples = makeTable([
     'Custom',
     'lister -c "penguin.example.net ls /usr/share/doc"',
     'penguin.example.net ls /usr/share/doc',
-    'list',
+    'lister',
   ],
 ]);
 
