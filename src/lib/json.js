@@ -28,7 +28,7 @@ json.read = async () => {
 
 json.write = async (commands) => {
   try {
-    await fs.writeJson(fileName, commands);
+    await fs.writeJson(file, commands);
 
     return true;
   } catch (e) {
