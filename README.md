@@ -1,6 +1,6 @@
 # ez-ssh
 
-A super-simple command line interface for handling ssh into a remote machine.
+A super-simple Mac OS X command line interface for handling ssh into a remote machine.
 
 ```bash
 $ ez-ssh <alias> [options]
